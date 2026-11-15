@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>航空部品工場 1939–1941</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="css/pixel.css">
+<link rel="stylesheet" href="css/panels.css">
+</head>
+<body>
+<div id="app"></div>
+<div id="modal-root"></div>
+<div id="toast-root"></div>
+<input type="file" id="import-file" accept="application/json,.json" hidden>
+
+<!--
+  読み込み順(依存の向き): namespace → data → core → systems → ui → dev → main
+  ファイルを追加したら、必ずこの一覧の該当する層に <script> を足すこと。
+  tools/run-sim.js はこの一覧を読んで js/ui/ と js/main.js 以外をNode上で実行する。
+-->
+<script src="js/namespace.js"></script>
+
+<!-- data: 定数データのみ(ロジックを書かない) -->
+<script src="js/data/config.js"></script>
+<script src="js/data/materials.js"></script>
+<script src="js/data/facilities.js"></script>
+<script src="js/data/parts.js"></script>
+<script src="js/data/units.js"></script>
+<script src="js/data/companies.js"></script>
+<script src="js/data/contracts.js"></script>
+<script src="js/data/research.js"></script>
+<script src="js/data/events.js"></script>
+<script src="js/data/missions.js"></script>
+<script src="js/data/index.js"></script>
+
+<!-- core: 共通基盤 -->
+<script src="js/core/util.js"></script>
+<script src="js/core/log.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/save.js"></script>
+<script src="js/core/clock.js"></script>
+
+<!-- systems: ゲームのルール(DOMに触らない。すべて state を引数に取る) -->
+<script src="js/systems/economy.js"></script>
+<script src="js/systems/workforce.js"></script>
+<script src="js/systems/facilities.js"></script>
+<script src="js/systems/aircraft.js"></script>
+<script src="js/systems/production.js"></script>
+<script src="js/systems/contracts.js"></script>
+<script src="js/systems/progression.js"></script>
+<script src="js/systems/research.js"></script>
+<script src="js/systems/events.js"></script>
+<script src="js/systems/war.js"></script>
+<script src="js/systems/missions.js"></script>
+<script src="js/systems/rivals.js"></script>
+<script src="js/systems/monthEnd.js"></script>
+<script src="js/systems/gameLoop.js"></script>
+
+<!-- ui: 画面(state を読んで描き、操作は systems を呼ぶ) -->
+<script src="js/ui/dom.js"></script>
+<script src="js/ui/actions.js"></script>
+<!-- ui/pix: ピクセルアートの素材(コードで描く) -->
+<script src="js/ui/pix/pixel.js"></script>
+<script src="js/ui/pix/icons.js"></script>
+<script src="js/ui/pix/iso.js"></script>
+<script src="js/ui/sprites.js"></script>
+<script src="js/ui/aircraftSvg.js"></script>
+<script src="js/ui/pix/aircraftPixel.js"></script>
+<!-- ui/map: クォータービューの工場マップ -->
+<script src="js/ui/map/effects.js"></script>
+<script src="js/ui/map/factoryMap.js"></script>
+<!-- 常に出ている部分と、左のボタンから開くパネル -->
+<script src="js/ui/hud.js"></script>
+<script src="js/ui/panels/build.js"></script>
+<script src="js/ui/panels/jobs.js"></script>
+<script src="js/ui/panels/stock.js"></script>
+<script src="js/ui/panels/shop.js"></script>
+<script src="js/ui/panels/staff.js"></script>
+<script src="js/ui/panels/contracts.js"></script>
+<script src="js/ui/panels/research.js"></script>
+<script src="js/ui/panels/design.js"></script>
+<script src="js/ui/panels/info.js"></script>
+<!-- ui/scenes: 全画面のピクセルアニメーション(試験飛行など) -->
+<script src="js/ui/scenes/scenes.js"></script>
+<script src="js/ui/scenes/testFlight.js"></script>
+<script src="js/ui/modal.js"></script>
+<script src="js/ui/app.js"></script>
+
+<!-- dev: 開発用(デバッグモード、自動プレイ) -->
+<script src="js/dev/debug.js"></script>
+<script src="js/dev/simulate.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
